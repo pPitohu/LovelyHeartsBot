@@ -267,7 +267,7 @@ bot.launch({
 SurpriseNotifier.launch({
     webhook: {
         domain: process.env.DOMAIN + 'callback2',
-        port: process.env.PORT + 1,
+        port: Number(process.env.PORT) + 1,
     },
 });
 

@@ -11,11 +11,11 @@ const app = express();
 const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
 const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
 
-bot.setWebhook(
+bot.telegram.setWebhook(
     'https://lovelyhearts-bot.herokuapp.com/' +
         process.env.LovelyHeartsBOT_TOKEN
 );
-SurpriseNotifierBOT_TOKEN.setWebhook(
+SurpriseNotifierBOT_TOKEN.telegram.setWebhook(
     'https://lovelyhearts-bot.herokuapp.com/' +
         process.env.SurpriseNotifierBOT_TOKEN
 );

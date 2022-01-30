@@ -264,13 +264,13 @@ mongoose.connect(
 
 bot.launch({
     webhook: {
-        domain: 'https://lovelyhearts-bot.herokuapp.com/',
+        domain: 'https://lovelyhearts-bot.herokuapp.com/callback1',
         port: 5555,
     },
 });
 SurpriseNotifier.launch({
     webhook: {
-        domain: 'https://lovelyhearts-bot.herokuapp.com/',
+        domain: 'https://lovelyhearts-bot.herokuapp.com/callback2',
         port: 6666,
     },
 });

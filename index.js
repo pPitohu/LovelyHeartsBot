@@ -268,18 +268,16 @@ SurpriseNotifier.launch();
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
-app.use(bot.webhookCallback('/callback'));
-app.use(SurpriseNotifier.webhookCallback('/callback'));
+app.use(bot.webhookCallback('/callback1'));
+app.use(SurpriseNotifier.webhookCallback('/callback2'));
 
 const CURRENT_HOST = 'https://lovely-hearts-bot.vercel.app';
 
 app.get('/', async (_req, res) => {
-    const url = `${CURRENT_HOST}/callback`;
-    const botInfo = await bot.telegram.getWebhookInfo();
-    if (!botInfo) await bot.telegram.setWebhook(url);
-    const SurpriseNotifierInfo =
-        await SurpriseNotifier.telegram.getWebhookInfo();
-    if (!SurpriseNotifierInfo) await SurpriseNotifier.telegram.setWebhook(url);
+    const url1 = `${CURRENT_HOST}/callback1`;
+    const url2 = `${CURRENT_HOST}/callback2`;
+    await bot.telegram.setWebhook(url1);
+    await SurpriseNotifier.telegram.setWebhook(url2);
     res.send(`listening on ${CURRENT_HOST}`);
 });
 

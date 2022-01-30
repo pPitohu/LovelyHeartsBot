@@ -73,9 +73,7 @@ SurpriseNotifier.start(async (ctx) => {
 bot.start(async (ctx) => {
     await ctx.reply(
         `
-        <b>Привет, ${
-            ctx.from.first_name ? ctx.from.first_name : 'Незнакомец'
-        }! ♥️</b>
+        <b>Привет, Незнакомец! ♥️</b>
         Этот бот поможет тебе сделать приятный сюрприз твоему другу или просто близкому человеку.
         Чтобы узнать, как это сделать, держи команду: /how <i>(нажми)</i>
         `.replaceAll('  ', ''),

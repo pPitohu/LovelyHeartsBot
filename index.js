@@ -271,8 +271,12 @@ const CURRENT_HOST = 'https://lovely-hearts-bot.vercel.app';
 
 app.get('/', async (_req, res) => {
     const url = `${CURRENT_HOST}/callback`;
-    await bot.telegram.setWebhook(CURRENT_HOST);
-    await SurpriseNotifier.telegram.setWebhook(CURRENT_HOST);
+    const botInfo = await bot.telegram.getWebhookInfo();
+    if (!botInfo) await bot.telegram.setWebhook(CURRENT_HOST);
+    const SurpriseNotifierInfo =
+        await SurpriseNotifier.telegram.getWebhookInfo();
+    if (!SurpriseNotifierInfo)
+        await SurpriseNotifier.telegram.setWebhook(CURRENT_HOST);
     res.send(`listening on ${CURRENT_HOST}`);
 });
 

@@ -260,14 +260,14 @@ mongoose.connect(
 
 bot.launch({
     webhook: {
-        domain: process.env.DOMAIN,
+        domain: process.env.DOMAIN + 'callback1',
         port: process.env.PORT,
     },
 });
 SurpriseNotifier.launch({
     webhook: {
-        domain: process.env.DOMAIN,
-        port: process.env.PORT,
+        domain: process.env.DOMAIN + 'callback2',
+        port: process.env.PORT + 1,
     },
 });
 

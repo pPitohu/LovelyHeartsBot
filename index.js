@@ -7,11 +7,13 @@ const animations = require('./animations.js');
 const User = require('./models/User');
 
 const app = express();
-/*{
+
+const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN, {
     telegram: { webhookReply: false },
-}*/
-const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
-const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
+});
+const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN, {
+    telegram: { webhookReply: false },
+});
 bot.use(session());
 SurpriseNotifier.use(session());
 
@@ -260,8 +262,18 @@ mongoose.connect(
     () => console.log('connected to database')
 );
 
-bot.launch();
-SurpriseNotifier.launch();
+bot.launch({
+    webhook: {
+        domain: 'https://lovelyhearts-bot.herokuapp.com/',
+        port: 1234,
+    },
+});
+SurpriseNotifier.launch({
+    webhook: {
+        domain: 'https://lovelyhearts-bot.herokuapp.com/',
+        port: 1234,
+    },
+});
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));

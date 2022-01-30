@@ -174,6 +174,9 @@ animations.forEach((animation) => {
         }
     });
 });
+bot.on('message', async (ctx) => {
+    consolee.log(ctx);
+});
 
 // отправка анимации -->
 bot.on('text', async (ctx) => {

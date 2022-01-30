@@ -8,12 +8,8 @@ const User = require('./models/User');
 
 const app = express();
 
-const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN, {
-    telegram: { webhookReply: false },
-});
-const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN, {
-    telegram: { webhookReply: false },
-});
+const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
+const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
 bot.use(session());
 SurpriseNotifier.use(session());
 

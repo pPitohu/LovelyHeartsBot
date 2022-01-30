@@ -68,27 +68,25 @@ SurpriseNotifier.start(async (ctx) => {
 });
 
 bot.start(async (ctx) => {
-    await ctx.reply(
-        `
+    const text = `
         <b>Привет, ${
             ctx.from.first_name ? ctx.from.first_name : 'Незнакомец'
         }! ♥️</b>
         Этот бот поможет тебе сделать приятный сюрприз твоему другу или просто близкому человеку.
         Чтобы узнать, как это сделать, держи команду: /how <i>(нажми)</i>
-        `.replaceAll('  ', ''),
-        {
-            parse_mode: 'HTML',
-            reply_markup: {
-                keyboard: [
-                    ['Обычная', 'Бчб'],
-                    ['Отправить анимацию другому'],
-                    ['Поддержать разработчика!'],
-                ],
-                resize_keyboard: true,
-                one_time_keyboard: true,
-            },
-        }
-    );
+        `.replaceAll('  ', '');
+    await ctx.reply(text, {
+        parse_mode: 'HTML',
+        reply_markup: {
+            keyboard: [
+                ['Обычная', 'Бчб'],
+                ['Отправить анимацию другому'],
+                ['Поддержать разработчика!'],
+            ],
+            resize_keyboard: true,
+            one_time_keyboard: true,
+        },
+    });
 });
 
 bot.command('how', async (ctx) => {

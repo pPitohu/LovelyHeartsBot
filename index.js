@@ -81,7 +81,7 @@ bot.start(async (ctx) => {
             parse_mode: 'HTML',
             reply_markup: {
                 keyboard: [
-                    ['Обычная', 'Бчб'],
+                    ['Обычная'],
                     ['Отправить анимацию другому'],
                     ['Поддержать разработчика!'],
                 ],
@@ -185,10 +185,7 @@ bot.on('text', async (ctx) => {
     await ctx.reply(
         '✅Отлично, пользователь найден!\nВыбери анимацию, которую хочешь ему отправить.',
         Markup.inlineKeyboard([
-            [
-                callbackBtn(animations[0].human_name, animations[0].name),
-                callbackBtn(animations[1].human_name, animations[1].name),
-            ],
+            [callbackBtn(animations[0].human_name, animations[0].name)],
         ])
     );
 });
@@ -274,11 +271,11 @@ const CURRENT_HOST = 'https://lovely-hearts-bot.vercel.app';
 
 app.get('/', async (_req, res) => {
     const url = `${CURRENT_HOST}/callback`;
-    await bot.telegram.setWebhook(url);
-    await SurpriseNotifier.telegram.setWebhook(url);
+    await bot.telegram.setWebhook(CURRENT_HOST);
+    await SurpriseNotifier.telegram.setWebhook(CURRENT_HOST);
     res.send(`listening on ${CURRENT_HOST}`);
 });
 
 app.listen(1234, () => {
-    console.log(`listening on ${APP_PORT}`);
+    console.log(`listening on 1234`);
 });

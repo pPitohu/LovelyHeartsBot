@@ -15,7 +15,7 @@ bot.telegram.setWebhook(
     'https://lovelyhearts-bot.herokuapp.com/' +
         process.env.LovelyHeartsBOT_TOKEN
 );
-SurpriseNotifierBOT_TOKEN.telegram.setWebhook(
+SurpriseNotifier.telegram.setWebhook(
     'https://lovelyhearts-bot.herokuapp.com/' +
         process.env.SurpriseNotifierBOT_TOKEN
 );

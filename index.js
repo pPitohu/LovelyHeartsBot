@@ -78,7 +78,7 @@ bot.start(async (ctx) => {
         <b>Привет, Незнакомец! ♥️</b>
         Этот бот поможет тебе сделать приятный сюрприз твоему другу или просто близкому человеку.
         Чтобы узнать, как это сделать, держи команду: /how <i>(нажми)</i>
-        `.replace(/\t/g, ''),
+        `.replaceAll('  ', ''),
         {
             parse_mode: 'HTML',
             reply_markup: {
@@ -170,7 +170,7 @@ animations.forEach((animation) => {
 // отправка анимации -->
 bot.on('text', async (ctx) => {
     if (!ctx.message.text.includes('@')) return;
-    ctx.session = ctx.session ?? {
+    ctx.session = {
         sendAnimation: {
             name: '',
             human_name: '',

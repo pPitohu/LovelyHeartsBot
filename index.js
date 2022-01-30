@@ -1,9 +1,12 @@
+const express = require('express');
 const { Telegraf, Markup, session } = require('telegraf');
 const axios = require('axios');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const animations = require('./animations.js');
 const User = require('./models/User');
+
+const app = express();
 
 const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
 const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
@@ -265,3 +268,19 @@ SurpriseNotifier.launch();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
+
+app.use(bot.webhookCallback('/callback'));
+app.use(SurpriseNotifier.webhookCallback('/callback'));
+
+const CURRENT_HOST = 'https://lovely-hearts-bot.vercel.app';
+
+app.get('/', async (_req, res) => {
+    const url = `${CURRENT_HOST}/callback`;
+    await bot.telegram.setWebhook(url);
+    await SurpriseNotifier.telegram.setWebhook(url);
+    res.send(`listening on ${CURRENT_HOST}`);
+});
+
+app.listen(1234, () => {
+    console.log(`listening on ${APP_PORT}`);
+});

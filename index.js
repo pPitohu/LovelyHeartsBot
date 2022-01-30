@@ -165,7 +165,7 @@ animations.forEach((animation) => {
 // отправка анимации -->
 bot.on('text', async (ctx) => {
     if (!ctx.message.text.includes('@')) return;
-    ctx.session ??= {
+    ctx.session = ctx.session ?? {
         sendAnimation: {
             name: '',
             human_name: '',

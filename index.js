@@ -7,13 +7,11 @@ const animations = require('./animations.js');
 const User = require('./models/User');
 
 const app = express();
-
-const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN, {
+/*{
     telegram: { webhookReply: false },
-});
-const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN, {
-    telegram: { webhookReply: false },
-});
+}*/
+const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
+const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
 bot.use(session());
 SurpriseNotifier.use(session());
 
@@ -268,21 +266,21 @@ SurpriseNotifier.launch();
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
-app.use(bot.webhookCallback('/callback1'));
-app.use(SurpriseNotifier.webhookCallback('/callback2'));
+// app.use(bot.webhookCallback('/callback1'));
+// app.use(SurpriseNotifier.webhookCallback('/callback2'));
 
-const CURRENT_HOST = 'https://lovely-hearts-bot.vercel.app';
+// const CURRENT_HOST = 'https://lovely-hearts-bot.vercel.app';
 
-app.get('/', async (_req, res) => {
-    const url1 = `${CURRENT_HOST}/callback1`;
-    const url2 = `${CURRENT_HOST}/callback2`;
-    const webhookUrl1 = await bot.telegram.getWebhookInfo();
-    if (!webhookUrl1) await bot.telegram.setWebhook(url1);
-    const webhookUrl2 = await SurpriseNotifier.telegram.getWebhookInfo();
-    if (!webhookUrl2) await SurpriseNotifier.telegram.setWebhook(url2);
-    res.send(`listening on ${CURRENT_HOST}`);
-});
+// app.get('/', async (_req, res) => {
+//     const url1 = `${CURRENT_HOST}/callback1`;
+//     const url2 = `${CURRENT_HOST}/callback2`;
+//     const webhookUrl1 = await bot.telegram.getWebhookInfo();
+//     if (!webhookUrl1) await bot.telegram.setWebhook(url1);
+//     const webhookUrl2 = await SurpriseNotifier.telegram.getWebhookInfo();
+//     if (!webhookUrl2) await SurpriseNotifier.telegram.setWebhook(url2);
+//     res.send(`listening on ${CURRENT_HOST}`);
+// });
 
-app.listen(1234, () => {
-    console.log(`listening on 1234`);
-});
+// app.listen(1234, () => {
+//     console.log(`listening on 1234`);
+// });

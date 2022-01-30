@@ -11,14 +11,18 @@ const app = express();
 const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
 const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
 
-bot.telegram.setWebhook(
-    'https://lovelyhearts-bot.herokuapp.com/' +
-        process.env.LovelyHeartsBOT_TOKEN
-);
-SurpriseNotifier.telegram.setWebhook(
-    'https://lovelyhearts-bot.herokuapp.com/' +
-        process.env.SurpriseNotifierBOT_TOKEN
-);
+bot.telegram
+    .setWebhook(
+        'https://lovelyhearts-bot.herokuapp.com/' +
+            process.env.LovelyHeartsBOT_TOKEN
+    )
+    .then((res) => console.log(res));
+SurpriseNotifier.telegram
+    .setWebhook(
+        'https://lovelyhearts-bot.herokuapp.com/' +
+            process.env.SurpriseNotifierBOT_TOKEN
+    )
+    .then((res) => console.log(res));
 
 bot.use(session());
 SurpriseNotifier.use(session());
@@ -173,9 +177,6 @@ animations.forEach((animation) => {
             console.log(e);
         }
     });
-});
-bot.on('message', async (ctx) => {
-    consolee.log(ctx);
 });
 
 // отправка анимации -->

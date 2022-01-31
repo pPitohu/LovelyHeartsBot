@@ -1,1 +1,1 @@
-worker: npm start
+web: micro-bot -p $PORT

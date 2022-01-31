@@ -8,10 +8,8 @@ const User = require('./models/User');
 
 const app = express();
 
-const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN, { polling: true });
-const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN, {
-    polling: true,
-});
+const bot = new Telegraf(process.env.LovelyHeartsBOT_TOKEN);
+const SurpriseNotifier = new Telegraf(process.env.SurpriseNotifierBOT_TOKEN);
 
 bot.use(session());
 SurpriseNotifier.use(session());
@@ -261,30 +259,13 @@ mongoose.connect(
     () => console.log('connected to database')
 );
 
-const port = process.env.PORT || 5000;
-
-// app.use(express.json());
-
-// app.get('/', (req, res) => {
-//     res.status(200).json({ message: 'Hello from the Bot API.' });
-// });
-// // TELEGRAM WEBHOOK - https://core.telegram.org/bots/api#setwebhook
-// app.post(`/${process.env.LovelyHeartsBOT_TOKEN}`, (req, res) => {
-//     bot.processUpdate(req.body);
-//     res.status(200).json({ message: 'ok' });
-// });
-// app.post(`/${process.env.SurpriseNotifierBOT_TOKEN}`, (req, res) => {
-//     bot.processUpdate(req.body);
-//     res.status(200).json({ message: 'ok' });
-// });
-
-app.listen(port, () => {
-    console.log(`\n\nServer running on port ${port}.\n\n`);
-});
-
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
+module.exports = {
+    bot,
+    SurpriseNotifier,
+};
 // app.use(bot.webhookCallback('/callback1'));
 // app.use(SurpriseNotifier.webhookCallback('/callback2'));
 

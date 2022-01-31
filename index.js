@@ -251,6 +251,9 @@ SurpriseNotifier.action('checkAnimation', async (ctx) => {
     }
 });
 
+bot.launch();
+SurpriseNotifier.launch();
+
 mongoose.connect(
     process.env.DB_NAME,
     {
@@ -262,10 +265,6 @@ mongoose.connect(
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
-module.exports = {
-    bot,
-    SurpriseNotifier,
-};
 // app.use(bot.webhookCallback('/callback1'));
 // app.use(SurpriseNotifier.webhookCallback('/callback2'));
 

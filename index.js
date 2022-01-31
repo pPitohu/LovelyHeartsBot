@@ -258,13 +258,6 @@ bot.launch({
         path: '/bot',
     },
 });
-SurpriseNotifier.launch({
-    webhook: {
-        domain: 'https://lovelyhearts-bot.herokuapp.com',
-        port: process.env.PORT || 5000,
-        path: '/surprise',
-    },
-});
 
 mongoose.connect(
     process.env.DB_NAME,

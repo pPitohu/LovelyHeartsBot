@@ -251,8 +251,20 @@ SurpriseNotifier.action('checkAnimation', async (ctx) => {
     }
 });
 
-bot.launch();
-SurpriseNotifier.launch();
+bot.launch({
+    webhook: {
+        domain: 'https://lovelyhearts-bot.herokuapp.com',
+        port: process.env.PORT || 5000,
+        path: '/bot',
+    },
+});
+SurpriseNotifier.launch({
+    webhook: {
+        domain: 'https://lovelyhearts-bot.herokuapp.com',
+        port: process.env.PORT || 5000,
+        path: '/surprise',
+    },
+});
 
 mongoose.connect(
     process.env.DB_NAME,
